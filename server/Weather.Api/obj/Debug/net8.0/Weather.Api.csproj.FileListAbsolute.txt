@@ -31,3 +31,12 @@ D:\Github\Findex\WeatherApplication\server\Weather.Api\obj\Debug\net8.0\refint\W
 D:\Github\Findex\WeatherApplication\server\Weather.Api\obj\Debug\net8.0\Weather.Api.pdb
 D:\Github\Findex\WeatherApplication\server\Weather.Api\obj\Debug\net8.0\Weather.Api.genruntimeconfig.cache
 D:\Github\Findex\WeatherApplication\server\Weather.Api\obj\Debug\net8.0\ref\Weather.Api.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Github\Findex\WeatherApplication\server\Weather.Api\bin\Debug\net8.0\System.Text.Json.dll

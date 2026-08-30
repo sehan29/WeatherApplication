@@ -16,6 +16,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.MapGet("/api/health", () => Results.Ok(new
+{
+    status = "healthy",
+    checkedAtUtc = DateTimeOffset.UtcNow
+})).AllowAnonymous();
+
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
