@@ -1,0 +1,23 @@
+# Local secrets
+**/.env
+!.env.example
+
+# .NET
+**/bin/
+**/obj/
+*.user
+
+# React / Vite
+**/node_modules/
+client/dist/
+
+# Editor and OS files
+.vs/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Local tools used while preparing the project
+.tools/
+
