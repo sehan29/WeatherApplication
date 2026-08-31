@@ -80,6 +80,9 @@ export default function WeatherCharts({ cities }) {
           color: colors.text,
           autoSkip: false,
           maxRotation: 0,
+          callback(value) {
+            return this.getLabelForValue(value).split(/\s+/)
+          },
           font: { family: 'DM Sans', size: 11 },
         },
       },
@@ -122,14 +125,25 @@ export default function WeatherCharts({ cities }) {
             <span>Index / 100</span>
           </header>
 
-          <div className="chart-canvas-wrap">
-            <Bar
-              data={data}
-              options={options}
-              role="img"
-              aria-label="Vertical bar chart comparing the Comfort Index of each city"
-            />
+          <div
+            className="chart-scroll"
+            role="region"
+            aria-label="Scrollable city comfort chart"
+            tabIndex="0"
+          >
+            <div
+              className="chart-canvas-wrap"
+              style={{ '--chart-min-width': `${Math.max(640, cities.length * 88)}px` }}
+            >
+              <Bar
+                data={data}
+                options={options}
+                role="img"
+                aria-label="Vertical bar chart comparing the Comfort Index of each city"
+              />
+            </div>
           </div>
+          <p className="chart-scroll-hint">Swipe sideways to view every city.</p>
         </article>
       </div>
     </section>

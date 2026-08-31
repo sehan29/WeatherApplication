@@ -906,12 +906,31 @@ svg {
   height: 350px;
 }
 
+.chart-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: var(--line-strong) transparent;
+  scrollbar-width: thin;
+}
+
+.chart-scroll-hint {
+  display: none;
+  margin: 0.55rem 0 0;
+  color: var(--muted);
+  font-size: 0.68rem;
+  text-align: center;
+}
+
 .method-panel {
   width: 220px;
+  min-width: 0;
 }
 
 .comfort-filter-select {
   display: grid;
+  min-width: 0;
   gap: 0.55rem;
 }
 
@@ -924,7 +943,10 @@ svg {
 }
 
 .comfort-filter-select select {
+  display: block;
   width: 100%;
+  min-width: 0;
+  max-width: 100%;
   min-height: 42px;
   padding: 0 2.1rem 0 0.75rem;
   border: 1px solid var(--line-strong);
@@ -977,6 +999,7 @@ svg {
 
 .sort-field {
   display: grid;
+  min-width: 0;
   gap: 0.55rem;
   color: var(--muted);
   font-size: 0.73rem;
@@ -990,6 +1013,10 @@ svg {
 }
 
 .sort-field select {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   min-height: 42px;
   padding: 0 1.9rem 0 0.65rem;
   border: 1px solid var(--line);
@@ -1208,14 +1235,26 @@ svg {
   .analytics-section__head > p { text-align: left; }
   .chart-card { padding: 1rem; }
   .chart-card__head { margin-bottom: 1.2rem; }
-  .chart-canvas-wrap { height: 390px; }
+  .chart-scroll { padding-bottom: 0.35rem; }
+  .chart-canvas-wrap {
+    min-width: var(--chart-min-width, 640px);
+    height: 390px;
+  }
+  .chart-scroll-hint { display: block; }
 
   .ranking-toolbar { align-items: stretch; flex-direction: column; }
   .search-field { width: 100%; }
-  .ranking-toolbar__controls { width: 100%; }
-  .method-panel, .sort-field { width: 50%; }
+  .ranking-toolbar__controls {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .method-panel, .sort-field { width: auto; min-width: 0; }
   .comfort-filter-select { max-width: none; }
-  .sort-field select { width: 100%; }
+  .comfort-filter-select select, .sort-field select {
+    min-height: 48px;
+    font-size: 1rem;
+  }
 
   .weather-list { border-top: 0; }
   .weather-list__head { display: none; }
@@ -1236,6 +1275,10 @@ svg {
   .detail-cell { justify-content: flex-end; }
   .score-cell { grid-column: 1 / -1; }
   .ranking-footnote { text-align: left; }
+}
+
+@media (max-width: 600px) {
+  .ranking-toolbar__controls { grid-template-columns: minmax(0, 1fr); }
 }
 
 @media (max-height: 700px) {
@@ -1267,8 +1310,7 @@ svg {
   .summary-grid { grid-template-columns: 1fr; }
   .summary-card--featured { grid-column: auto; }
   .summary-card { min-height: 124px; }
-  .ranking-toolbar__controls { align-items: stretch; flex-direction: column; }
-  .method-panel, .sort-field { width: 100%; }
+  .ranking-toolbar__controls { grid-template-columns: minmax(0, 1fr); }
   .cache-button { font-size: 0.68rem; }
 }
 
