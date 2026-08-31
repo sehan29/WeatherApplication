@@ -6,11 +6,16 @@ using Weather.Api.Configuration;
 using Weather.Api.Options;
 using Weather.Api.Services;
 
-
 var builder = WebApplication.CreateBuilder(args);
 
 EnvFileLoader.Load(Path.Combine(builder.Environment.ContentRootPath, ".env"));
 builder.Configuration.AddEnvironmentVariables();
+
+builder.Services
+    .AddOptions<OpenWeatherApiOptions>()
+    .Bind(builder.Configuration.GetSection(OpenWeatherApiOptions.SectionName))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
 
 builder.Services
     .AddOptions<Auth0Options>()
@@ -45,7 +50,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Title = "Weather Comfort API",
         Version = "v1",
-        Description = "Live city weather."
+        Description = "Live city weather ranked by the server-side hybrid Comfort Index."
     });
 
     options.AddSecurityDefinition("bearer", new OpenApiSecurityScheme
@@ -53,7 +58,7 @@ builder.Services.AddSwaggerGen(options =>
         Type = SecuritySchemeType.Http,
         Scheme = "bearer",
         BearerFormat = "JWT",
-        Description = "Paste an Auth0 access token."
+        Description = "Paste an Auth0 access token. The 'Bearer' prefix is added automatically."
     });
 
     options.AddSecurityRequirement(document => new OpenApiSecurityRequirement
@@ -76,7 +81,18 @@ builder.Services.AddCors(options =>
         .AllowAnyMethod());
 });
 
- 
+builder.Services.AddSingleton<ICityCatalog, CityCatalog>();
+builder.Services.AddSingleton<IComfortIndexCalculator, ComfortIndexCalculator>();
+builder.Services.AddSingleton<IWeatherCacheMonitor, WeatherCacheMonitor>();
+builder.Services.AddSingleton<IWeatherAnalyticsService, WeatherAnalyticsService>();
+
+builder.Services.AddHttpClient<IOpenWeatherClient, OpenWeatherClient>((serviceProvider, client) =>
+{
+    var options = serviceProvider.GetRequiredService<IOptions<OpenWeatherApiOptions>>().Value;
+    client.BaseAddress = new Uri(options.BaseUrl);
+    client.Timeout = TimeSpan.FromSeconds(10);
+    client.DefaultRequestHeaders.UserAgent.ParseAdd("WeatherComfortDashboard/1.0");
+});
 
 var app = builder.Build();
 
