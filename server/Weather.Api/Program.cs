@@ -4,6 +4,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi;
 using Weather.Api.Configuration;
 using Weather.Api.Options;
+using Weather.Api.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
